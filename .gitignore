@@ -1,0 +1,8 @@
+.DS_Store
+.env
+Gemfile
+Gemfile.lock
+npm-debug.log
+
+.sass-cache
+node_modules

@@ -1,0 +1,37 @@
+version: '3'
+services:
+  default: &default
+    image: jekyll/jekyll
+    entrypoint: ['jekyll']
+    working_dir: /app
+    env_file: .env
+    volumes:
+      - ./:/app
+      - ${JEKYLL_CONTENT_DIR}:/src
+      - ${JEKYLL_CONTENT_DIR}/Gemfile:/app/Gemfile
+      - ${JEKYLL_CONTENT_DIR}/Gemfile.lock:/app/Gemfile.lock
+
+  jekyll: &jekyll
+    <<: *default
+    working_dir: /src
+    volumes:
+      - ./:/app
+      - ${JEKYLL_CONTENT_DIR}:/src
+  bundle:
+    <<: *jekyll
+    working_dir: /src
+    entrypoint: ['bundle']
+
+  npm:
+    <<: *default
+    entrypoint: ['npm']
+  grunt:
+    <<: *default
+    entrypoint: ['npm', 'run', 'grunt']
+
+  web:
+    <<: *default
+    entrypoint: ['npm', 'run', 'grunt']
+    command: ['serve']
+    ports:
+      - 4000:4000
