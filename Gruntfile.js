@@ -74,6 +74,17 @@ module.exports = function (grunt) {
           dest: '/src/_dist'
         }]
       }
+    },
+
+    validation: {
+      options: {
+        errorHTMLRootDir: '/src/w3c-errors',
+        path: '/src/w3c-errors/validation-status.json',
+        reportpath: '/src/w3c-errors/validation-report.json'
+      },
+      files: {
+        src: '/src/_dist/**/*.html'
+      }
     }
   });
 
@@ -81,10 +92,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-w3c-html-validation');
 
   // Default task(s).
   grunt.registerTask('serve', ['jekyll:serve']);
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('validate', ['validation']);
+  grunt.registerTask('default', ['build', 'validate']);
 
 };

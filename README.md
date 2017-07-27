@@ -27,6 +27,6 @@ Proceed with caution, since this option may overwrite existing files.
     docker-compose run --rm grunt serve
 
 
-## Build
+## Build & Validate
 
-    docker-compose run --rm grunt build
+    docker-compose run --rm grunt
