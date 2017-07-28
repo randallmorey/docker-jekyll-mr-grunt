@@ -85,6 +85,15 @@ module.exports = function (grunt) {
       files: {
         src: '/src/_dist/**/*.html'
       }
+    },
+
+    accessibility: {
+      options: {
+        accessibilityLevel: 'WCAG2AAA'
+      },
+      test: {
+        src: '/src/_dist/**/*.html'
+      }
     }
   });
 
@@ -93,11 +102,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-w3c-html-validation');
+  grunt.loadNpmTasks('grunt-accessibility');
 
   // Default task(s).
   grunt.registerTask('serve', ['jekyll:serve']);
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
-  grunt.registerTask('validate', ['validation']);
+  grunt.registerTask('validate', ['validation', 'accessibility']);
   grunt.registerTask('default', ['build', 'validate']);
 
 };
