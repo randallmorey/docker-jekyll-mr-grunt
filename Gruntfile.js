@@ -94,7 +94,18 @@ module.exports = function (grunt) {
       test: {
         src: '/src/_dist/**/*.html'
       }
-    }
+    },
+
+    csslint: {
+      options: {
+        'order-alphabetical': false,
+        'qualified-headings': false,
+        'unique-headings': false
+      },
+      target: {
+        src: '/src/_dist/**/*.css'
+      }
+    },
   });
 
   grunt.loadNpmTasks('grunt-jekyll');
@@ -103,11 +114,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-w3c-html-validation');
   grunt.loadNpmTasks('grunt-accessibility');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
 
   // Default task(s).
   grunt.registerTask('serve', ['jekyll:serve']);
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
-  grunt.registerTask('validate', ['validation', 'accessibility']);
+  grunt.registerTask('validate', ['validation', 'accessibility', 'csslint']);
   grunt.registerTask('default', ['build', 'validate']);
 
 };

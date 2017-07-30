@@ -3,12 +3,14 @@
   "version": "0.0.0-alpha.0",
   "description": "Develop, validate, and deploy static websites with ease inside ready-to-run Docker containers.",
   "author": "randall@randallmorey.com",
+  "license": "MIT",
   "scripts": {
     "grunt": "./node_modules/.bin/grunt"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-accessibility": "^5.0.0",
+    "grunt-contrib-csslint": "^2.0.0",
     "grunt-contrib-cssmin": "^2.2.0",
     "grunt-contrib-htmlmin": "^2.4.0",
     "grunt-contrib-uglify": "^3.0.1",
