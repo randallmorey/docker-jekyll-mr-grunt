@@ -1,0 +1,9 @@
+{
+  // http://eslint.org/docs/rules/
+
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6
+    }
+  }
+}

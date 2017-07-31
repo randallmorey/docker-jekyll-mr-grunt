@@ -78,9 +78,9 @@ module.exports = function (grunt) {
 
     validation: {
       options: {
-        errorHTMLRootDir: '/src/w3c-errors',
-        path: '/src/w3c-errors/validation-status.json',
-        reportpath: '/src/w3c-errors/validation-report.json'
+        errorHTMLRootDir: '/src/_w3c-errors',
+        path: '/src/_w3c-errors/validation-status.json',
+        reportpath: '/src/_w3c-errors/validation-report.json'
       },
       files: {
         src: '/src/_dist/**/*.html'
@@ -96,16 +96,18 @@ module.exports = function (grunt) {
       }
     },
 
-    csslint: {
-      options: {
-        'order-alphabetical': false,
-        'qualified-headings': false,
-        'unique-headings': false
-      },
+    sasslint: {
       target: {
-        src: '/src/_dist/**/*.css'
+        src: ['/src/**/*.sass', '/src/**/*.scss']
       }
     },
+
+    eslint: {
+      options: {
+        config: ".eslintrc"
+      },
+      src: ['/src/**/*.js', '!/src/_dist/**/*.js', '!/src/_serve/**/*.js']
+    }
   });
 
   grunt.loadNpmTasks('grunt-jekyll');
@@ -114,12 +116,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-w3c-html-validation');
   grunt.loadNpmTasks('grunt-accessibility');
-  grunt.loadNpmTasks('grunt-contrib-csslint');
+  grunt.loadNpmTasks('grunt-sass-lint');
+  grunt.loadNpmTasks('grunt-contrib-eslint');
 
   // Default task(s).
   grunt.registerTask('serve', ['jekyll:serve']);
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
-  grunt.registerTask('validate', ['validation', 'accessibility', 'csslint']);
+  grunt.registerTask('validate', [
+    'validation',
+    'accessibility',
+    'sasslint',
+    'eslint'
+  ]);
   grunt.registerTask('default', ['build', 'validate']);
 
 };
