@@ -3,12 +3,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    env : {
-      deploy : {
-        src : '/src/.env'
-      }
-    },
-
     jekyll: {
       options: {
         src: '/src'
@@ -113,10 +107,24 @@ module.exports = function (grunt) {
         config: ".eslintrc"
       },
       src: ['/src/**/*.js', '!/src/_dist/**/*.js', '!/src/_serve/**/*.js']
+    },
+
+    s3: {
+      options: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        bucket: process.env.AWS_S3_BUCKET,
+        region: process.env.AWS_REGION,
+        createBucket: true,
+        enableWeb: true
+      },
+      deploy: {
+        cwd: '/src/_dist',
+        src: '**'
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -125,6 +133,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-accessibility');
   grunt.loadNpmTasks('grunt-sass-lint');
   grunt.loadNpmTasks('grunt-contrib-eslint');
+  grunt.loadNpmTasks('grunt-aws');
 
   // Default task(s).
   grunt.registerTask('serve', ['jekyll:serve']);
@@ -135,6 +144,7 @@ module.exports = function (grunt) {
     'sasslint',
     'eslint'
   ]);
+  grunt.registerTask('deploy', ['s3:deploy']);
   grunt.registerTask('default', ['build', 'validate']);
 
 };

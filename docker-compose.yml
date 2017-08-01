@@ -4,7 +4,9 @@ services:
     image: jekyll/jekyll
     entrypoint: ['jekyll']
     working_dir: /app
-    env_file: .env
+    env_file:
+      - .env
+      - ${JEKYLL_CONTENT_DIR}/.env
     volumes:
       - ./:/app
       - ${JEKYLL_CONTENT_DIR}:/src
