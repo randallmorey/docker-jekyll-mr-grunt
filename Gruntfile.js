@@ -122,6 +122,19 @@ module.exports = function (grunt) {
         cwd: '/src/_dist',
         src: '**'
       }
+    },
+
+    cloudfront: {
+      options: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        distributionId:  process.env.AWS_CLOUDFRONT_DISTRIBUTION_ID
+      },
+      deploy: {
+        options: {
+          invalidations: ['/*']
+        }
+      }
     }
   });
 
@@ -144,7 +157,7 @@ module.exports = function (grunt) {
     'sasslint',
     'eslint'
   ]);
-  grunt.registerTask('deploy', ['s3:deploy']);
+  grunt.registerTask('deploy', ['s3:deploy', 'cloudfront:deploy']);
   grunt.registerTask('default', ['build', 'validate']);
 
 };
