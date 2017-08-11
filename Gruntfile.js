@@ -156,7 +156,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
   grunt.registerTask('validate', [
     'validation',
-    'accessibility',
+    //'accessibility',
     'sasslint',
     'eslint'
   ]);
