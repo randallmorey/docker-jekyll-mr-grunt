@@ -30,6 +30,11 @@ services:
   grunt:
     <<: *default
     entrypoint: ['npm', 'run', 'grunt']
+  build:
+    <<: *default
+    entrypoint: ['npm', 'run', 'grunt']
+    environment:
+      - JEKYLL_ENV=production
 
   web:
     <<: *default
