@@ -25,7 +25,7 @@ module.exports = function (grunt) {
     htmlmin: {
       options: {
         collapseBooleanAttributes: true,
-        collapseInlineTagWhitespace: true,
+        collapseInlineTagWhitespace: false,
         collapseWhitespace: true,
         decodeEntities: true,
         removeComments: true,
