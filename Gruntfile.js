@@ -25,7 +25,7 @@ module.exports = function (grunt) {
     htmlmin: {
       options: {
         collapseBooleanAttributes: true,
-        collapseInlineTagWhitespace: true,
+        collapseInlineTagWhitespace: false,
         collapseWhitespace: true,
         decodeEntities: true,
         removeComments: true,
@@ -97,6 +97,9 @@ module.exports = function (grunt) {
     },
 
     sasslint: {
+      options: {
+        configFile: '/src/.sass-lint.yml',
+      },
       target: {
         src: ['/src/**/*.sass', '/src/**/*.scss']
       }
@@ -153,7 +156,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['jekyll:build', 'htmlmin', 'cssmin', 'uglify']);
   grunt.registerTask('validate', [
     'validation',
-    'accessibility',
+    //'accessibility',
     'sasslint',
     'eslint'
   ]);

@@ -1,6 +1,6 @@
 {
   "name": "docker-jekyll-mr-grunt",
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "description": "Develop, validate, and deploy static websites with ease inside ready-to-run Docker containers.",
   "author": "randall@randallmorey.com",
   "license": "MIT",
